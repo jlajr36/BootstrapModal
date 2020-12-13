@@ -1,27 +1,58 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <p>Link 1</p>
-        <a data-toggle="modal" data-id="ISBN564541" title="Add this item" class="open-AddBookDialog btn btn-primary" href="#addBookDialog">test</a>
 
-        <p>&nbsp;</p>
+        <a href="#my_modal" 
+            data-toggle="modal" 
+            data-book-id="235478"
+            data-book-title="this is it"
+            data-book-author="Joe">Open Modal</a>
 
-
-        <p>Link 2</p>
-        <a data-toggle="modal" data-id="ISBN-001122" title="Add this item" class="open-AddBookDialog btn btn-primary" href="#addBookDialog">test</a>
-
-        <div class="modal hide" id="addBookDialog">
-            <div class="modal-header">
-                <button class="close" data-dismiss="modal">×</button>
-                <h3>Modal header</h3>
-            </div>
-            <div class="modal-body">
-                <p>some content</p>
-                <input type="text" name="bookId" id="bookId" value=""/>
+        <div class="modal" id="my_modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">Modal header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Book ID</p>
+                        <input type="text" name="bookId" value=""/>
+                        <p>Book Title</p>
+                        <input type="text" name="bookTitle" value=""/>
+                        <p>Book Author</p>
+                        <input type="text" name="bookAuthor" value=""/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" 
+                            data-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <script>
+            $('#my_modal').on('show.bs.modal', function(e) {
+                var bookId = $(e.relatedTarget).data('book-id');
+                $(e.currentTarget).find('input[name="bookId"]').val(bookId);
+
+                var bookTitle = $(e.relatedTarget).data('book-title');
+                $(e.currentTarget).find('input[name="bookTitle"]').val(bookTitle);
+
+                var bookAuthor = $(e.relatedTarget).data('book-author');
+                $(e.currentTarget).find('input[name="bookAuthor"]').val(bookAuthor);
+            });
+        </script>
     </body>
 </html>
