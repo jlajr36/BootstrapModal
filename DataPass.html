@@ -11,11 +11,13 @@
     </head>
     <body>
 
+        <!--Does not like capitals in value names-->
         <a href="#my_modal" 
             data-toggle="modal" 
             data-book-id="235478"
             data-book-title="this is it"
-            data-book-author="Joe">Open Modal</a>
+            data-book-author="Joe"
+            data-book-isnew="0">Open Modal</a> <!--0 Not 1 Yes-->
 
         <div class="modal" id="my_modal">
             <div class="modal-dialog">
@@ -33,6 +35,8 @@
                         <input type="text" name="bookTitle" value=""/>
                         <p>Book Author</p>
                         <input type="text" name="bookAuthor" value=""/>
+                        <p>New Book</p>
+                        <input type="checkbox" id="newBook" name="newBook"/>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" 
@@ -52,6 +56,15 @@
 
                 var bookAuthor = $(e.relatedTarget).data('book-author');
                 $(e.currentTarget).find('input[name="bookAuthor"]').val(bookAuthor);
+
+                var isNew = $(e.relatedTarget).data('book-isnew');
+                var checkbox = document.getElementById('newBook');
+                if (isNew === 1) {
+                    checkbox.checked = true;
+                } else {
+                    checkbox.checked = false;
+                }
+
             });
         </script>
     </body>
